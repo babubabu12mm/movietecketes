@@ -9,24 +9,24 @@ const Offer = require('./Offer');
 
 function initAssociations() {
   // Screen - Seat relationship
-  Screen.hasMany(Seat, { foreignKey: 'screenId', onDelete: 'CASCADE' });
-  Seat.belongsTo(Screen, { foreignKey: 'screenId' });
+  Screen.hasMany(Seat, { foreignKey: { name: 'screenId', allowNull: false }, onDelete: 'CASCADE' });
+  Seat.belongsTo(Screen, { foreignKey: { name: 'screenId', allowNull: false } });
 
   // Movie - Show relationship
-  Movie.hasMany(Show, { foreignKey: 'movieId', onDelete: 'CASCADE' });
-  Show.belongsTo(Movie, { foreignKey: 'movieId', as: 'movieId' }); // Alias to match Mongoose key
+  Movie.hasMany(Show, { foreignKey: { name: 'movieId', allowNull: false }, onDelete: 'CASCADE' });
+  Show.belongsTo(Movie, { foreignKey: { name: 'movieId', allowNull: false }, as: 'movie' }); // Alias changed to movie
 
   // Screen - Show relationship
-  Screen.hasMany(Show, { foreignKey: 'screenId', onDelete: 'CASCADE' });
-  Show.belongsTo(Screen, { foreignKey: 'screenId', as: 'screenId' }); // Alias to match Mongoose key
+  Screen.hasMany(Show, { foreignKey: { name: 'screenId', allowNull: false }, onDelete: 'CASCADE' });
+  Show.belongsTo(Screen, { foreignKey: { name: 'screenId', allowNull: false }, as: 'screen' }); // Alias changed to screen
 
   // User - Booking relationship
-  User.hasMany(Booking, { foreignKey: 'userId', onDelete: 'CASCADE' });
-  Booking.belongsTo(User, { foreignKey: 'userId', as: 'userId' }); // Alias to match Mongoose key
+  User.hasMany(Booking, { foreignKey: { name: 'userId', allowNull: false }, onDelete: 'CASCADE' });
+  Booking.belongsTo(User, { foreignKey: { name: 'userId', allowNull: false }, as: 'user' }); // Alias changed to user
 
   // Show - Booking relationship
-  Show.hasMany(Booking, { foreignKey: 'showId', onDelete: 'CASCADE' });
-  Booking.belongsTo(Show, { foreignKey: 'showId', as: 'showId' }); // Alias to match Mongoose key
+  Show.hasMany(Booking, { foreignKey: { name: 'showId', allowNull: false }, onDelete: 'CASCADE' });
+  Booking.belongsTo(Show, { foreignKey: { name: 'showId', allowNull: false }, as: 'show' }); // Alias changed to show
 }
 
 module.exports = initAssociations;

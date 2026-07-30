@@ -78,10 +78,16 @@ const Booking = sequelize.define('Booking', {
   timestamps: true
 });
 
-// Map id to _id for frontend compatibility
+// Map attributes and associations to JSON for frontend compatibility
 Booking.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());
   values._id = values.id;
+  if (values.user) {
+    values.userId = values.user;
+  }
+  if (values.show) {
+    values.showId = values.show;
+  }
   return values;
 };
 

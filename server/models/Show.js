@@ -59,10 +59,16 @@ const Show = sequelize.define('Show', {
   ]
 });
 
-// Map id to _id for frontend compatibility
+// Map attributes and associations to JSON for frontend compatibility
 Show.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());
   values._id = values.id;
+  if (values.movie) {
+    values.movieId = values.movie;
+  }
+  if (values.screen) {
+    values.screenId = values.screen;
+  }
   return values;
 };
 
